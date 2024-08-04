@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: staging
-    database: charged-state-382320
+    database: nyc-citibike-data-pipeline
     schema: nyc_citibike_data
 
 

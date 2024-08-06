@@ -201,4 +201,5 @@ key.json
 .terraform.lock.hcl
 *.terraform.tfstate
 nyc-citibike-data-pipeline-ba0b5a6983ed.json
+*.js 
 

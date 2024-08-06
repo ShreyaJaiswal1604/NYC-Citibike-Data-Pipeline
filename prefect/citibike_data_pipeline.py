@@ -41,8 +41,9 @@ PARTITION_COL ="started_at"
 @task(retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
 def fetch(dataset_url: str) -> pd.DataFrame:
     """ Reads citi bike data from web to pandas dataframe"""
+    print(f"dataset URL --> {dataset_url}")
     resp = requests.get(dataset_url)
-    zipfile = ZipFile(BytesIO(resp.content))
+    zipfile = ZipFile(ZipFile(BytesIO(resp.content)))
     df_list = []
     for file_name in zipfile.namelist():
         print(file_name)  # Print each filename to validate
@@ -134,7 +135,11 @@ def etl_web_to_gcs(year: int , month: int) -> None :
    dataset_file = f"{year}{month:02}-citibike-tripdata"
    dest_file = f"{dataset_file}.parquet"
    print(dataset_file)
-   if(month == 5 or month == 6):
+   if (year != 2024):
+       his_dataset_url = f"{year}-citibike-tripdata"
+       dataset_url = f"https://s3.amazonaws.com/tripdata/{his_dataset_url}.zip"
+       
+   elif(((month == 5 or month == 6) and (year == 2024))):
        dataset_url = f"https://s3.amazonaws.com/tripdata/{dataset_file}.zip"
    else:
        dataset_url = f"https://s3.amazonaws.com/tripdata/{dataset_file}.csv.zip"   
@@ -192,7 +197,11 @@ if __name__ =='__main__':
     year4= 2024
     months_2024= [1,2,3,4,5,6]
 
-    etl_parent_flow(year4,months_2024)
+    year3= 2023
+    months_2023= [1,2,3,4,5,6,7,8,9,10,11,12]
+
+    #etl_parent_flow(year4,months_2024)
+    etl_parent_flow(year3,months_2023)
     # etl_parent_flow(year2,months_2022)
-    # etl_parent_flow(year3,months_2023)
+    
     create_BQpartitioned_table()

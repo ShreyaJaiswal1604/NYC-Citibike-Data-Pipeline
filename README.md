@@ -138,3 +138,49 @@ cd to prefect folder
 prefect --version
 prefect server start
 
+# Tranformation - dbt
+Transformation happening within the datawarehouse itself
+Example: Keeping dbt_project.yml in the dbt Subdirectory
+Keep dbt_project.yml in the dbt Subdirectory:
+
+Ensure your project structure is:
+Copy code
+your_project/
+├── dbt/
+│   ├── dbt_project.yml
+│   ├── models/
+Adjust the Project Subdirectory in dbt Cloud:
+
+In dbt Cloud, set the project subdirectory to dbt.
+
+ow the schema.yml configuration you provided relates specifically to BigQuery:
+
+version: 2: This indicates the schema file version, which is the same across different data warehouses, including BigQuery.
+
+sources:: In BigQuery, sources refer to tables or views that exist in your BigQuery datasets.
+
+- name: staging: This is the name you’ve given to the source. In BigQuery, this name will be used to reference the source data within your dbt models. It does not correspond to a physical table but is a logical name for grouping related sources.
+
+database: charged-state-382320: In BigQuery, the term "database" is equivalent to "project." So, charged-state-382320 represents your BigQuery project ID where your data is stored.
+
+schema: nyc_citibike_data: In BigQuery, the term "schema" corresponds to "dataset." So, nyc_citibike_data is the name of the dataset within the BigQuery project that contains your source tables.
+
+tables:: This section lists the tables within the dataset that dbt will use as sources.
+
+- name: citibike_tripsdata: This specifies a table named citibike_tripsdata in the dataset nyc_citibike_data. This table exists in your BigQuery dataset, and dbt will use this table as a source for your models.
+
+In summary, for BigQuery:
+
+The staging source refers to a logical grouping of tables.
+charged-state-382320 is your BigQuery project ID.
+nyc_citibike_data is the dataset within that project.
+citibike_tripsdata is the table within that dataset.
+You use this configuration in dbt to pull data from the citibike_tripsdata table in BigQuery into your dbt models.
+
+Run dbt Seed Command:
+
+To load the data from citibike_stations.csv into BigQuery, you would use the dbt seed command:
+sh
+
+dbt seed
+

@@ -1,186 +1,184 @@
-# NYC-Citibike-Data-Pipeline
+# NYC-Citibike-Data-Pipeline <img src="https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/logos/nyc-citibike-logo.png" alt="Citi Bike Logo" style="width: 50px; vertical-align: right;" />
+
+
+
+## 1. Project Description
+
 This project implements a batch data pipeline for NYC's Citibike data. It extracts raw data, stores it in Google Cloud Storage and BigQuery, transforms it using DBT, and visualizes insights with Google Looker Data Studio. The pipeline showcases the end-to-end data engineering process.
 
+## 2. Dataset
+
+The Citi Bike dataset offers detailed information about bike rides in New York City, including insights into usage patterns, ride durations, and station popularity. You can download the dataset from the following link: [Citi Bike Dataset](https://s3.amazonaws.com/tripdata/index.html).
+
+## 3. Tools and Technologies
+
+- **Google Cloud Platform (GCP)**: A suite of cloud computing services that runs on the same infrastructure that Google uses internally for its end-user products.
+  - **[Google Cloud Storage](https://cloud.google.com/storage)**: A scalable, fully-managed object storage service that allows you to store and retrieve any amount of data at any time.
+  - **[BigQuery](https://cloud.google.com/bigquery)**: A fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data.
+  - **[Google Looker Data Studio](https://lookerstudio.google.com/)**: A business intelligence tool that helps you turn your data into informative dashboards and reports that are easy to read, easy to share, and fully customizable.
+  
+- **[DBT (Data Build Tool)](https://www.getdbt.com/)**: A command-line tool that enables data analysts and engineers to transform data in their warehouse more effectively by allowing them to write data transformation code in SQL.
+
+- **[Terraform](https://www.terraform.io/)**: An open-source infrastructure as code software tool that provides a consistent CLI workflow to manage hundreds of cloud services.
+
+- **[Prefect](https://www.prefect.io/)**: A workflow management system that allows you to build, run, and monitor data pipelines at scale.
 
 
-#set up commands
+## 3. Citibike Pipeline Architecture
+
+### Data Flow
+
+1. **Extraction**: Raw data is extracted and stored in Google Cloud Storage.
+2. **Loading**: Data is loaded into BigQuery for further processing.
+3. **Transformation**: DBT (Data Build Tool) is used to transform and model the data within BigQuery.
+4. **Visualization**: Insights are visualized using Google Looker Data Studio.
+
+
+
+### 4. Steps to Execute
+
+<details>
+  <summary><h4>💻 Code Setup</h4></summary>
+  
+  #### 1. Clone the git repo to your system
+
+  ```
+  git clone <your-repo-url>
+
+  ```
+
+#### 2. Python Environment Setup
 
 ```
 python3 -m venv .venv
+source .venv/bin/activate
+```
+#### 3. Install necessary packaged and libraries
 
 ```
-
-source .venv/bin/activate
-
-
-1. Verify Current Account and Project
-Check Current Account:
-
-Verify which account is currently authenticated by running:
-bash
-Copy code
-gcloud auth list
-This will show you the active account and any other accounts associated with your gcloud configuration.
-Check Current Project:
-
-To see the active project in your gcloud configuration, run:
-bash
-Copy code
-gcloud config get-value project
-2. Authenticate with the Correct Account
-Log In with the Desired Account:
-
-If you need to authenticate with shreyajaiswal0416@gmail.com, you can use the following command:
-bash
-Copy code
-gcloud auth login
-Follow the prompts to log in with your Google account. Ensure you are using the correct email address.
-Set the Project for Your Account:
-
-If you need to set a specific project, use the following command:
-bash
-Copy code
-gcloud config set project YOUR_PROJECT_ID
-Replace YOUR_PROJECT_ID with the ID of the project you want to work with. If you don't have a project, you can create one in the Google Cloud Console.
-
-Addressing the Quota Project Discrepancy
-Here's how you can resolve the issue:
-
-Verify the Active Project
-
-You've successfully set the active project with:
-
-bash
-Copy code
-gcloud config set project nyc-citibike-data-pipeline
-Ensure this is the project you intend to work with.
-
-Update the Quota Project for Application Default Credentials
-
-To align your ADC with the active project, you need to update the quota project using the following command:
-
-bash
-Copy code
-gcloud auth application-default set-quota-project nyc-citibike-data-pipeline
-This command sets the quota project for your ADC to match the active project.
-
-Verify the Update
-
-After running the command, verify that the quota project has been updated successfully. You can check the current quota project setting by running:
-
-bash
-Copy code
-gcloud config list
+  pip install -r requirements.txt
+```
+</details>
 
 
-#terraform commands
-terraform init
-terraform validate
+<details>
+  <summary><h4>🌐 Google Cloud Environment Setup</h4></summary>
 
-terraform plan -var="project=nyc-citibike-data-pipeline"
+#### 1. Log In with the Desired Google Account and Create a Project 
+- Access Google Cloud at [Google Cloud Console](https://console.cloud.google.com/cloud-resource-manager).
 
-terraform apply -var="project=nyc-citibike-data-pipeline"
+#### 2. Configure Identity and Access Management (IAM) for the Service Account
+- Assign the following roles:
+  - BigQuery Admin
+  - Storage Admin
+  - Storage Object Admin
+
+#### 3. Authenticate Your Google Account
+- To authenticate with your Google account, use the following command:
+    ```sh
+    gcloud auth login
+    ```
+- Set the project for your account:
+    ```sh
+    gcloud config set project YOUR_PROJECT_ID
+    ```
+</details>
+
+<details>
+  <summary><h4>🛠️  Terraform Setup</h4></summary>
+
+#### 1. Installing Terraform and Adding it to Your PATH
+- If you don't have Terraform installed, you can download it from [here](https://www.terraform.io/downloads) and then add it to your PATH.
 
 
+#### 2. Configure Identity and Access Management (IAM) for the Service Account
+- Assign the following roles:
+  - BigQuery Admin
+  - Storage Admin
+  - Storage Object Admin
 
-#API's enabled
-1. Service Usage API
-2. BigQuery API
+#### 3. After step 1 and 2 navigate to the terraform folder 
+- command to navigate to the terraform folder
+    ```sh
+     cd terraform/
+    ```
+
+#### 4. Run the Following Commands to Create Your Project Infrastructure
+- Terraform commands:
+    ```sh
+     terraform init
+     terraform validate
+     terraform plan -var="project=nyc-citibike-data-pipeline"
+     terraform apply -var="project=nyc-citibike-data-pipeline"
+
+    ```
+    
+</details>
+
+<details>
+  <summary><h4>🧩 Prefect Framework Setup</h4></summary>
+
+#### 1. Confirm Prefect Installation in your virtual Environment
+- command to check the current version of the Prefect CLI
+    ```sh
+     prefect --version
+    ```
+#### 2. Start Prefect server
+- Command to initiate the Prefect server to begin managing and orchestrating your workflows
+    ```sh
+     prefect server start
+    ```
+    
+#### 3. Accessing and Configuring Blocks in the Prefect UI
+- Access the UI at http://127.0.0.1:4200/.
+- Update the blocks to register them with your credentials for Google Cloud Storage (GCS) and BigQuery. This can be done in the Blocks options.
+- You can either keep the block names as they appear in the code or rename them. If you choose to rename them, ensure that you update the code to reference the new block names.
+
+#### 4. Running the Prefect Data Pipeline
+- Return to the terminal and navigate to the prefect/ directory:
+    ```sh
+     cd prefect/
+    ```
+- Execute the data pipeline script:
+    ```sh
+     python citibike_data_pipeline.py
+    ```
+- The Python script will then store the Citibike data in both your GCS bucket and BigQuery.
+
+    
+</details>
+
+<details>
+  
+<summary><h4>🔍  Running the dbt Flow</h4></summary>
+
+#### 1. Confirm Prefect Installation in your virtual Environment
+- - Create a dbt account and log in using [dbt Cloud](https://cloud.getdbt.com).
+  - 
+#### 2. Clone the Repository
+  - Once logged in, clone the repository for use.
+    
+#### 3. Run the dbt Command
+  - In the CLI at the bottom, execute the following command:
+    ```sh
+    dbt run
+    ```
+ - This command will run all the models and create the final dataset called `fact_citibike`.
 
 
+#### 4. Verify Successful Execution
+- Upon a successful run, the lineage of `fact_citibike` will be displayed as shown below:
+    
+</details>
 
-Notes on Terraform Configuration and Resources
-1. Terraform Initialization
-Version Requirement: Specifies that the Terraform version must be at least 1.0.
-Backend Configuration:
-Default backend is set to local for storing the state file locally.
-Can be changed to gcs (Google Cloud Storage) or s3 (Amazon S3) for remote state storage.
-Required Providers:
-Uses the Google provider from HashiCorp.
-2. Provider Configuration
-Google Provider:
-project: The GCP project ID is set using a variable.
-region: The region for deploying resources is set using a variable.
-credentials: Path to the service account JSON key file is specified for authentication.
-Example: file("../nyc-citibike-data-pipeline-ba0b5a6983ed.json").
-3. Resources Created
-a. Google Cloud Storage Bucket (Data Lake)
-Resource Type: google_storage_bucket
+<details>
+  
+<summary><h4>📊 Visualization in Looker Studio</h4></summary>
 
-Purpose: Creates a data lake storage bucket.
+#### 1. Utilize the Dataset
+  - You can now use the fact_citibike dataset within Looker Studio for creating visualizations.
+    
+#### 2. Access the Report
+  - Find the repor </details>
 
-Key Attributes:
-
-name: Unique bucket name combining a local variable and project name.
-location: Specifies the region for the bucket.
-storage_class: Defines the storage class (e.g., STANDARD).
-uniform_bucket_level_access: Enables uniform access control.
-versioning: Turns on object versioning.
-lifecycle_rule: Sets a rule to delete objects older than 30 days.
-force_destroy: Allows bucket deletion even with objects inside.
-Documentation: Google Storage Bucket
-
-b. Google BigQuery Dataset
-Resource Type: google_bigquery_dataset
-
-Purpose: Creates a dataset in BigQuery for loading raw data from GCS.
-
-Key Attributes:
-
-dataset_id: Specifies the dataset ID using a variable.
-project: Sets the GCP project ID.
-location: Defines the dataset's region.
-Documentation: Google BigQuery Dataset
-
-# PREFECT - FRAMEWORK
-cd to prefect folder
-
-prefect --version
-prefect server start
-
-# Tranformation - dbt
-Transformation happening within the datawarehouse itself
-Example: Keeping dbt_project.yml in the dbt Subdirectory
-Keep dbt_project.yml in the dbt Subdirectory:
-
-Ensure your project structure is:
-Copy code
-your_project/
-├── dbt/
-│   ├── dbt_project.yml
-│   ├── models/
-Adjust the Project Subdirectory in dbt Cloud:
-
-In dbt Cloud, set the project subdirectory to dbt.
-
-ow the schema.yml configuration you provided relates specifically to BigQuery:
-
-version: 2: This indicates the schema file version, which is the same across different data warehouses, including BigQuery.
-
-sources:: In BigQuery, sources refer to tables or views that exist in your BigQuery datasets.
-
-- name: staging: This is the name you’ve given to the source. In BigQuery, this name will be used to reference the source data within your dbt models. It does not correspond to a physical table but is a logical name for grouping related sources.
-
-database: charged-state-382320: In BigQuery, the term "database" is equivalent to "project." So, charged-state-382320 represents your BigQuery project ID where your data is stored.
-
-schema: nyc_citibike_data: In BigQuery, the term "schema" corresponds to "dataset." So, nyc_citibike_data is the name of the dataset within the BigQuery project that contains your source tables.
-
-tables:: This section lists the tables within the dataset that dbt will use as sources.
-
-- name: citibike_tripsdata: This specifies a table named citibike_tripsdata in the dataset nyc_citibike_data. This table exists in your BigQuery dataset, and dbt will use this table as a source for your models.
-
-In summary, for BigQuery:
-
-The staging source refers to a logical grouping of tables.
-charged-state-382320 is your BigQuery project ID.
-nyc_citibike_data is the dataset within that project.
-citibike_tripsdata is the table within that dataset.
-You use this configuration in dbt to pull data from the citibike_tripsdata table in BigQuery into your dbt models.
-
-Run dbt Seed Command:
-
-To load the data from citibike_stations.csv into BigQuery, you would use the dbt seed command:
-sh
-
-dbt seed
 

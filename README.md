@@ -23,8 +23,7 @@ The Citi Bike dataset offers detailed information about bike rides in New York C
 
 - **[Prefect](https://www.prefect.io/)**: A workflow management system that allows you to build, run, and monitor data pipelines at scale.
 
-
-## 3. Citibike Pipeline Architecture
+## 4. Citibike Pipeline Architecture
 
 ### Data Flow
 
@@ -33,9 +32,7 @@ The Citi Bike dataset offers detailed information about bike rides in New York C
 3. **Transformation**: DBT (Data Build Tool) is used to transform and model the data within BigQuery.
 4. **Visualization**: Insights are visualized using Google Looker Data Studio.
 
-
-
-### 4. Steps to Execute
+## 5. Steps to Execute
 
 <details>
   <summary><h4>💻 Code Setup</h4></summary>

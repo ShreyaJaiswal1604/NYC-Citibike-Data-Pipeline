@@ -176,6 +176,7 @@ source .venv/bin/activate
   - You can now use the fact_citibike dataset within Looker Studio for creating visualizations.
     
 #### 2. Access the Report
-  - Find the repor </details>
+  - You can find the report for the half-year Citibike analysis [Report-2024](https://lookerstudio.google.com/reporting/7772f82f-5d07-4cfd-b1e9-e2c409147608).
+ </details>
 
-
+## 5. Citibike Dashboard 2024

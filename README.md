@@ -181,6 +181,7 @@ source .venv/bin/activate
  </details>
 
 ## 5. Citibike Dashboard 2024
+Access the NYC Citibike Dashboard - [Report-2024](https://lookerstudio.google.com/reporting/7772f82f-5d07-4cfd-b1e9-e2c409147608)
 - #### **Half-Yearly Report NYC Citi Bike User Analysis (Jan - Jul 2024)**
   ---
   ![NYC Citi Bike User Analysis](https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/dashboard/2024-citibike-user-analysis.png)

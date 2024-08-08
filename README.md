@@ -33,6 +33,7 @@ The Citi Bike dataset offers detailed information about bike rides in New York C
 4. **Visualization**: Insights are visualized using Google Looker Data Studio.
 
 ## 5. Steps to Execute
+To successfully execute this project, follow the steps outlined below to set up the necessary environments and tools:
 
 <details>
   <summary><h4>💻 Code Setup</h4></summary>
@@ -180,3 +181,11 @@ source .venv/bin/activate
  </details>
 
 ## 5. Citibike Dashboard 2024
+- #### **Half-Yearly Report NYC Citi Bike User Analysis (Jan - Jul 2024)**
+  ---
+  ![NYC Citi Bike User Analysis](https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/dashboard/2024-citibike-user-analysis.png)
+
+- #### **Half-Yearly Report: NYC Citi Bike Monthly Ride Analysis (Jan - Jul 2024)**
+  ---
+  ![NYC Citi Bike Monthly Ride Analysis](https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/dashboard/2024-citibike-bike-ride-analysis.png)
+

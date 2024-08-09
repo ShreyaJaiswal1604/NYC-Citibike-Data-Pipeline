@@ -25,12 +25,18 @@ The Citi Bike dataset offers detailed information about bike rides in New York C
 
 ## 4. Citibike Pipeline Architecture
 
+
+![Citibike Pipeline Architecture](https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/architecture/nyc-citibike-pipeline.png)
+
+
 ### Data Flow
 
 1. **Extraction**: Raw data is extracted and stored in Google Cloud Storage.
 2. **Loading**: Data is loaded into BigQuery for further processing.
 3. **Transformation**: DBT (Data Build Tool) is used to transform and model the data within BigQuery.
 4. **Visualization**: Insights are visualized using Google Looker Data Studio.
+
+
 
 ## 5. Steps to Execute
 To successfully execute this project, follow the steps outlined below to set up the necessary environments and tools:

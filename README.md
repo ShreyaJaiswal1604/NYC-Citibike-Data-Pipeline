@@ -26,7 +26,7 @@ The Citi Bike dataset offers detailed information about bike rides in New York C
 ## 4. Citibike Pipeline Architecture
 
 
-![Citibike Pipeline Architecture](https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/architecture/nyc-citibike-pipeline.png)
+![Citibike Pipeline Architecture](https://github.com/ShreyaJaiswal1604/NYC-Citibike-Data-Pipeline/blob/main/images/architecture/nyc-citibike-pipeline-architecture.png)
 
 
 ### Data Flow
